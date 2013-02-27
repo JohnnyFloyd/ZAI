@@ -1,0 +1,21 @@
+<h1>Twoje wizyty</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Data</th>
+    <th>Godzina</th>
+    <th>Długość w godzinach</th>
+    <th>Klient</th>
+    <th>Zdjęcie</th>
+  </tr>
+
+<% for i in 0..(@visits.size-1) %>
+  <tr>
+    <td><%= @visits[i].visit_date %></td>
+    <td><%= @hours[i].to_s(:time) %></td>
+    <td><%= @visits[i].workhours.size%> </td>
+    <td><%= @users[i].name + " " + @users[i].surname %></td>
+    <td><%= image_tag @users[i].avatar.url(:thumb) %></td>
+  </tr>
+<% end %>
+</table>

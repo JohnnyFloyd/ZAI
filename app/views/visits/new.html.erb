@@ -1,0 +1,86 @@
+<h1>Nowa wizyta</h1>
+<%= form_tag( new_visit_path, :method => "post") do %>
+
+	<%= select_tag(:hdress, options_for_select(@hairdressers), { :prompt => "Wybierz fryzjera"}) %>
+	
+	<%= select_tag(:duration, options_for_select(@duration), { :prompt => "Wybierz długość wizyty"}) %>
+	
+	<% if @chooseHour %>
+		<%= hidden_field_tag ('date'), @date%>
+		<div class="previous">	
+			<%= hidden_field_tag ('previous'), false%>
+			<%= link_to "Poprzedni tydzień", '#'%>
+		</div>
+		<div class="next">
+			<%= hidden_field_tag ('next'), false%>
+			<%= link_to "Następny tydzień", '#'%>
+		</div>
+		<table class="table">
+			<thead>
+				<%= print_weekdays(@date) %>
+			</thead>
+			<tbody>
+				<% for hour in 0..(@hours[0].count-1)%>
+				<tr>
+					<% for day in 0..(@hours.count-1)%>
+						<% if @hours[day][hour].to_s != "" %>
+							<% if @schedule[day][hour] == true %>
+								<td class="available"> 
+								<%= hidden_field_tag ('chosen_hour['+day.to_s+']['+hour.to_s+']'), false%>
+								<%= radio_button_tag ('chosen_hour['+day.to_s+']['+hour.to_s+']'), true%>
+							<% else %>
+								<td class="unavailable"> 
+							<% end %>
+								<%= @hours[day][hour].strftime("%H:%M") %>
+								</td>
+						<% else %> 
+							<td class="none"></td>
+						<%end%>
+					<%end%>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+		<%= submit_tag "Zapisz się"%>
+	<% end %>
+
+<%end%>
+
+<script type="text/javascript">
+	$("document").ready(function() {
+		$('#hdress').bind('change', onChangeEvent);
+		$('#duration').bind('change', onChangeEvent);
+		$('table tbody tr input[type=radio]').bind('click', onSelectEvent);
+		<% if @chosenID %>
+		$('#hdress').val(<%= "'" + @chosenID + "'"%>);
+		$('#duration').val(<%= "'" + @mode + "'"%>);
+		<% end %>
+		$('.previous a').bind('click', previousClicked);
+		$('.next a').bind('click', nextClicked);
+
+	});
+	function onChangeEvent() {
+		if($("#hdress").val() == "" || $("#duration").val() == "")
+			return;
+		$('table tbody tr td input[type=radio]').attr("checked", false);
+		$('form').submit();
+		//$.post("/visits/new", { hdress: $("#hdress").val(), duration: $("#duration").val()});
+	}
+
+	function onSelectEvent() {
+		$('table tbody tr td input[type=radio]').attr("checked", false);
+		$(this).attr("checked", true);
+	}
+	
+	function previousClicked() {
+		$('table tbody tr td input[type=radio]').attr("checked", false);
+		$('#previous').val(true);
+		$('form').submit();
+	}
+	
+	function nextClicked() {
+		$('table tbody tr td input[type=radio]').attr("checked", false);
+		$('#next').val(true);
+		$('form').submit();
+	}
+</script>

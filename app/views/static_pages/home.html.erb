@@ -1,0 +1,13 @@
+<% provide(:title, 'Główna') %>
+<h1>Salon "Szopa"</h1>
+<% if user_signed_in? %>
+	<% if current_user.role?(:none)%>
+		<p>Musisz czekać na akceptacje przez administratora strony. Do tego momentu nie możesz korzystać z funkcjonalności strony.</p>
+	<% else %>
+		<p> Zapraszamy do korzystania z możliwości jakie oferuje nasza strona. Wszystkie możliwości są dostępnę klikając na link
+			 "Opcje", w prawym górnym rogu.</p>
+	<% end%>
+<% else%>
+<p>Witamy na stronie salonu fryzjerskiego "Szopa". By zacząć korzystać z naszych usług 
+	zarejestuj się albo zaloguj na wcześniej utworzone konto.</p>
+<% end%>

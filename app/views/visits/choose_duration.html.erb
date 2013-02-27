@@ -1,0 +1,5 @@
+<h1>Szybki wybór</h1>
+<%= form_tag( quick_choice_path, :method => "post") do %>
+	<%= select_tag(:duration, options_for_select(@duration), { :prompt => "Wybierz długość wizyty"}) %>
+	<div class="center-button"><%= submit_tag "Odszukaj najbliższy wolny termin"%></div>
+<% end %>

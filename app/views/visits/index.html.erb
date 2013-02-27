@@ -1,0 +1,23 @@
+<h1>Lista wizyt</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Czas wizyty</th>
+    <th>Klient</th>
+    <th>Fryzjer</th>
+    <th>Potwierdzone</th>
+    <th></th>
+  </tr>
+
+<% for i in 0..(@visits.size-1) %>
+  <tr>
+    <td><%= @hours[i]%></td>
+    <td><%= @users[i].name + " " + @users[i].surname %></td>
+    <td><%= @hairdressers[i].name + " " + @hairdressers[i].surname %></td>
+    <td><%= @visits[i].confirmed ? "Tak" : "Nie"%></td>
+    <td><%= link_to 'Usuń', @visits[i], confirm: 'Jesteś pewien?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

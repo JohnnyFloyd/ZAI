@@ -1,0 +1,24 @@
+Klient:
+Umówić się na wizytę (create)
+Wyświetlać swoje wizyty (show, index_user)
+Potwierdzać terminy wizyt (confirm)
+Zmieniać swoje dane osobowe
+Rejestracja siebie
+
+Fryzjer:
+Edycja czasu pracy
+Wyświetlanie swojego grafiku
+
+Admin:
+Akceptowanie klientów
+Dodawanie nowych fryzjerów i fryzjerek
+wyświetlanie listy zgłoszeń
+Wygenerowanie raportu zbiorczego
+
+Wizyta:
+data
+klient
+fryzjer
+jak długo
+
+

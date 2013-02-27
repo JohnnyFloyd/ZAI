@@ -1,0 +1,28 @@
+<h1>Harmonogram pracy</h1>
+<%= form_tag do %>
+
+<table class="table table-striped">
+	<thead>
+		<% for day in WEEKDAYS%>
+			<th><%= day %></th>
+		<% end %>
+	</thead>
+	<tbody>
+		<% for hour in 0..(@hours[0].count-1)%>
+		<tr>
+			<% for day in 0..(@hours.count-1)%>
+				<td>
+				<% if @hours[day][hour].to_s != "" %>
+					<%= @hours[day][hour].strftime("%H:%M") %>
+					<%=hidden_field_tag ('changed_schedule['+day.to_s+']['+hour.to_s+']'), false%>
+					<%=check_box_tag ('changed_schedule['+day.to_s+']['+hour.to_s+']'), true, (@schedule[day][hour] == true ? true : false)%>
+				<%end%>
+				</td>
+			<%end%>
+		</tr>
+		<%end%>
+	</tbody>
+</table>
+<%= submit_tag("Dokonaj zmian") %>
+<% end %>
+

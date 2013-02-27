@@ -1,0 +1,40 @@
+<h1>Twój profil</h1>
+<div class="row">
+  <aside class="span8">
+    <section>
+      <table class="output-table table">
+		<tr>
+			<td class="bold">Imię</td>
+			<td>
+				<%= @user.name%>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold">Nazwisko</td>
+			<td>
+				<%=@user.surname%>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold">E-mail</td>
+			<td>
+				<%= @user.email%>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold">Numer telefonu</td>
+			<td>
+				<% if @user.cellphone != nil%>
+					<%= @user.cellphone.to_i %>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+    </section>
+  </aside>
+  <aside class="span4">
+    <section>
+	<%= image_tag @user.avatar.url %>
+    </section>
+  </aside>
+</div>

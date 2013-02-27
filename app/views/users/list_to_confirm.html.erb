@@ -1,0 +1,20 @@
+<h1>Użytkownicy do potwierdzenia</h1>
+<table class="table">
+  <tr>
+    <th>Nazwa</th>
+    <th>Email</th>
+    <th>Zdjęcie</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name + " " + user.surname %></td>
+      <td><%= user.email %></td>
+      <td><%= image_tag user.avatar.url(:thumb) %></td>
+      <td><%= link_to 'Zaakceptuj', user_confirm_path(user.id) %></td>
+      <td><%= link_to 'Odrzuć', user, :confirm => 'Jesteś pewien? Konsekwencją będzie usunięcie użytkonika.', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>

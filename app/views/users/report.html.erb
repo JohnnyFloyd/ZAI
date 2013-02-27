@@ -1,0 +1,17 @@
+<h1>Raport</h1>
+<table class="table table-striped">
+	<thead>
+		<th>Fryzjer</th>
+		<th>Przepracowane godziny</th>
+		<th>Obsłużeni klienci</th>
+	</thead>
+	<tbody>
+		<% @hairdressers.each do |hdress|%>
+		<tr>
+			<td><%= hdress.name + " " + hdress.surname%></td>
+			<td><%= @report_results[hdress.id][:hours].to_i%></td>
+			<td><%= @report_results[hdress.id][:clients].size%></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

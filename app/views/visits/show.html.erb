@@ -1,0 +1,37 @@
+<table class="output-table table">
+	<tr>
+		<td class="bold">Data</td>
+		<td>
+  			<%= @visit.visit_date %>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Godzina</td>
+		<td>
+			<%= @hour.to_s(:time)%>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Długość wizyty w godzinach</td>
+		<td>
+			<%= @visit.workhours.size%>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Fryzjer</td>
+		<td>
+			<%= @visit.hairdresser.name + " " + @visit.hairdresser.surname%>
+		</td>
+	</tr>
+</table>
+<br/>
+<% if @visit.confirmed %>
+	Twoja wizyta została potwierdzona.
+<% elsif @visit.register_time + 600 > Time.now %>
+	Masz czas do <%= @visit.register_time + 600%> by potwierdzić wizytę.
+	<%= form_tag do%>
+		<%= submit_tag "Potwierdź wizytę"%>
+	<% end%>
+<% else%>
+	Niestety nie zdążyłeś. Musisz umówić się jeszcze raz.
+<% end%>

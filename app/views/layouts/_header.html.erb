@@ -1,0 +1,54 @@
+<header class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Salon Szopa", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <% if user_signed_in? %>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Opcje
+		        <% if current_user.role? :hairdresser %>
+		        	fryzjera
+		        <% elsif current_user.role? :client %>
+		        	klienta
+				<% elsif current_user.role? :admin %>
+		        	administratora
+		        <% else %>
+		        	oczekującego
+		        <% end %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+	            <% if !current_user.role? :none and !current_user.role? :admin%>
+	              	<li><%= link_to "Profil", user_path(current_user) %></li>
+	                <li><%= link_to "Edycja", edit_user_path(current_user) %></li>
+              	<% end %>
+          		<% if current_user.role? :hairdresser %>
+                	<li><%= link_to "Ustaw Plan", user_schedule_path(current_user) %></li>
+                	<li><%= link_to "Twoje wizyty", hairdresser_visits_path %></li>
+               	<% elsif current_user.role? :client %>
+                	<li><%= link_to "Umów się", new_visit_path %></li>
+                	<li><%= link_to "Szybki wybór", choose_duration_path %></li>
+                	<li><%= link_to "Twoje wizyty", client_visits_path %></li>
+				<% elsif current_user.role? :admin %>
+                	<li><%= link_to "Nowy fryzjer", new_user_path %></li>
+                	<li><%= link_to "Lista wizyt", visits_path %></li>
+                	<li><%= link_to "Zgłoszenia do zaakceptowania", list_to_confirm_path %></li>
+                	<li><%= link_to "Pokaż raport", report_path %></li>
+          		<% end %>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Wyloguj się", destroy_user_session_path %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Zaloguj się", new_user_session_path %></li>
+            <li><%= link_to "Zarejestruj się", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,38 @@
+<h1>Szybki wybór</h1>
+<p>Najbliższy wolny termin to:</p>
+<%= form_tag( quick_choice_path, :method => "post") do %>
+<table class="output-table table">
+	<tr>
+		<td class="bold">Data</td>
+		<td>
+			<%= hidden_field_tag 'date', @date%>
+			<%= @date.to_date.to_s(:db)%>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Godzina</td>
+		<td>
+			<%= @date.to_s(:time)%>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Długość wizyty w godzinach</td>
+		<td>
+			<%= hidden_field_tag 'duration', @duration%>
+			<%= @duration%>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold">Fryzjer</td>
+		<td>
+			<%= hidden_field_tag 'hdress', @hairdresser.id%>
+			<%= @hairdresser.name + " " + @hairdresser.surname%>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="center-button" style="text-align: center;">
+			<%= submit_tag "Zapisz się"%>
+		</td>
+	</tr>
+</table>
+<% end %>
